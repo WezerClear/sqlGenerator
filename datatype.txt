@@ -1,0 +1,37 @@
+0 --string--CHAR(size)	
+BINARY(size)	
+VARBINARY(size)
+TINYBLOB	
+TINYTEXT	
+TEXT(size)	
+BLOB(size)	
+MEDIUMTEXT	
+MEDIUMBLOB	
+LONGTEXT	
+LONGBLOB	
+ENUM(val, val, val, ...)	
+SET(val, val, val, ...)
+0
+1 --number--
+BIT(size)	
+BOOL	
+BOOLEAN	
+SMALLINT(size)	
+MEDIUMINT(size)	
+INT(size)
+INTEGER(size)	Equal to INT(size)
+BIGINT(size)	
+FLOAT(size, d)	
+FLOAT(p)	
+DOUBLE(size, d)	
+DOUBLE PRECISION(size, d)	 
+DECIMAL(size, d)	
+DEC(size, d)	
+1
+2 --Date and Time Data Types--
+DATE
+DATETIME(fsp)
+TIMESTAMP(fsp)
+TIME(fsp)
+YEAR
+2
