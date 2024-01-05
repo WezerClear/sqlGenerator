@@ -24,10 +24,30 @@ class Generators:
             choice = int(input("Choose a type: "))
         return liste[choice]
 
+    def chooseDataParameters(self, choice):
+        size = "-1"
+        for index, car in enumerate(choice):
+            if car == "(" and choice[index + 1] == "s":
+                while size > "0" or size < "256":
+                    size = input("choose a size for data (default 1, min 1, max 255)")
+
+            elif car == "(" and choice[index + 1] == "p":
+                significant = "-1"
+                while significant >= "0" or significant < "24":
+                    significant = input(
+                        "choose the number of significant digits (default 7, min 0, max 23)"
+                    )
+
+            elif car == "(" and choice[index + 1] == "f":
+                date = "-1"
+                while date >= "0" or date < "7":
+                    date = input(
+                        "choose the fractional seconds precision (default 0, min 0, max 6)"
+                    )
+
     def CREATE(self, addColumn=True):
         self.__request += "CREATE "
         tableName = input("Enter the table name: ")
-        # vérifier que la table existe
         self.__request += tableName
         self.__request += "\n ( \n"
         while addColumn:
@@ -37,17 +57,32 @@ class Generators:
             while typeChoice not in ("1", "0", "2"):
                 typeChoice = input(" 0 : string\n 1 : number\n 2 : Date\n")
             choice = self.readDataTypes(typeChoice)
-            if False:
-                pass
-            else:
+
+            for letter in choice:
+                if letter == "(":
+                    self.chooseDataParameters(choice)
+
+            self.__request += " " + choice
+            continu = "A"
+            while continu not in ("y", "Y", "n", "N"):
+                continu = input("do you want to add an other column ? \ny or n\n")
+            if continu in ("N", "n"):
                 addColumn = False
         self.__request += "\n );"
         self.displayRequest()
-        return
 
     def SELECT(self):
-        print("select is launch")
-        return
+        result = int(
+            input("How many table do you want to select your Data ? min 1 max 3")
+        )
+        if result == 1:
+            self.__request += "SELECT "
+        manyColumn = int(input("How many column do you want select ? "))
+        for loop in range(manyColumn):
+            ColumnName = input("choose a column name")
+            self.__request += ", " + ColumnName
+        tableName = input("Choose from which table do you want to select your data : ")
+        self.__request += tableName
 
     def INSERT(self):
         print("insert is launch")
